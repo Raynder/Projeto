@@ -26,9 +26,15 @@
 </head>
 
 <body>
-    @yield('header')
-    
-    @yield('content')
+    <div class="wrapper">
+        @include('layouts.header')
+
+        @include('layouts.sidebar')
+
+        @yield('content')
+
+        @include('layouts.footer')
+    </div>
 </body>
 
 </html>
