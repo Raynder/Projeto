@@ -10,9 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -22,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/adminlte.min.css.map') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
@@ -36,5 +34,15 @@
         @include('layouts.footer')
     </div>
 </body>
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+
+<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+<script src="{{ asset('js/adminlte.min.js') }}"></script>
+<script src="{{ asset('js/forms.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 </html>
