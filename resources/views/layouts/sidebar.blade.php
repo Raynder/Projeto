@@ -1,21 +1,11 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <img src="{{ asset('img/developer.jpg') }}" width="100%">
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
-        </div>
 
         <!-- SidebarSearch Form -->
         <div class="form-inline">
@@ -36,32 +26,38 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <i class="fas fa-solid fa-folder-plus"></i>
                         <p>
-                            Starter Pages
+                            Grupos
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @php
+                            $grupos = App\Models\Grupo::all();
+                        @endphp
+                        @foreach($grupos as $grupo)
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Active Page</p>
+                            <a href="{{ route('grupos.show', $grupo->id) }}" class="nav-link {{ Request::is('grupos/'.$grupo->id) ? 'active' : '' }}">
+                                <i class="fas fa-folder-open"></i>
+                                <p>{{ $grupo->nome }}</p>
                             </a>
                         </li>
+                        @endforeach
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('grupos') }}" class="nav-link {{ Request::is('grupos') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Inactive Page</p>
+                                <p>Novo grupo</p>
                             </a>
                         </li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Simple Link
+                            teste
                             <span class="right badge badge-danger">New</span>
                         </p>
                     </a>

@@ -18,23 +18,30 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.css') }}">
     <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/adminlte.min.css.map') }}" rel="stylesheet">
+    <link href="{{ asset('css/ijaboCropTool.min.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body class="@yield('body')">
     <div class="wrapper">
         @if(Auth::check())
-            @include('layouts.header')
+        @include('layouts.header')
 
-            @include('layouts.sidebar')
+        @include('layouts.sidebar')
 
-            @yield('content')
+        @yield('content')
 
-            @include('layouts.footer')
+        @include('layouts.footer')
         @else
-            @yield('content')
+        @yield('content')
         @endif
     </div>
 </body>
@@ -46,7 +53,46 @@
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
-<script src="{{ asset('js/forms.js') }}"></script>
+<!-- <script src="{{ asset('js/forms.js') }}"></script> -->
+<script src="{{ asset('js/ijaboCropTool.min.js') }}"></script>
+
+
 <script src="{{ asset('js/app.js') }}"></script>
+<script>
+    $('#_imgGrupo').ijaboCropTool({
+        processUrl: '{{ route('grupos.crop') }}',
+        withCSRF: ['_token', '{{ csrf_token() }}'],
+        onSuccess: function(message, element, status) {
+            salvarCrop(message)
+        },
+        onError(message, element, status) {
+           toastr.error(message);
+        }
+    });
+
+    function salvarCrop(img){
+        $.ajax({
+            url: '{{ route('grupos.store') }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                nome: $('#nome').val(),
+                img: img
+            },
+            success: function(data) {
+                if(data.length > 0){
+                    toastr.success(data);
+                    setTimeout(function(){
+                        window.location.href = '{{ route('grupos') }}';
+                    }, 2000);
+                }
+                else{
+                    toastr.error(data);
+                }
+            }
+        });
+    }
+ 
+</script>
 
 </html>
