@@ -11286,4 +11286,8 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-
+.login-box, .register-box {
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}

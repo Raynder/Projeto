@@ -23,15 +23,19 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="@yield('body')">
     <div class="wrapper">
-        @include('layouts.header')
+        @if(Auth::check())
+            @include('layouts.header')
 
-        @include('layouts.sidebar')
+            @include('layouts.sidebar')
 
-        @yield('content')
+            @yield('content')
 
-        @include('layouts.footer')
+            @include('layouts.footer')
+        @else
+            @yield('content')
+        @endif
     </div>
 </body>
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
