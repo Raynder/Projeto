@@ -20,4 +20,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/destroy/{id}', [App\Http\Controllers\GruposController::class, 'destroy'])->name('grupos.destroy');
     });
 
+    // Rotas de simulação
+    Route::prefix('simular')->group(function () {
+        Route::get('/', [App\Http\Controllers\SimularController::class, 'index'])->name('simular');
+        Route::get('/create', [App\Http\Controllers\SimularController::class, 'create'])->name('simular.create');
+        Route::post('/', [App\Http\Controllers\SimularController::class, 'store'])->name('simular.store');
+        Route::get('/show/{id}', [App\Http\Controllers\SimularController::class, 'show'])->name('simular.show');
+        Route::get('/edit/{id}', [App\Http\Controllers\SimularController::class, 'edit'])->name('simular.edit');
+        Route::get('/update/{id}', [App\Http\Controllers\SimularController::class, 'update'])->name('simular.update');
+        Route::get('/destroy/{id}', [App\Http\Controllers\SimularController::class, 'destroy'])->name('simular.destroy');
+    });
+
 });
